@@ -1,0 +1,11 @@
+{
+  "name": "my-canvas-class",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jellymando/my-canvas-class.git",
+  "author": "dain <dikakng@rsupport.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  }
+}
