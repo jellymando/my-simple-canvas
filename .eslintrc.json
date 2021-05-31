@@ -1,0 +1,75 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+  "rules": {
+    "quotes": ["error", "single"],
+    "prettier/prettier": "error",
+    "import/extensions": 0,
+    "import/prefer-default-export": 0,
+    "import/no-unresolved": 0,
+    "import/no-named-default": 0,
+    "react/jsx-filename-extension": [0],
+    "react/no-array-index-key": 1,
+    "react/jsx-props-no-spreading": ["off"],
+    "react-hooks/exhaustive-deps": 0,
+    "react/require-default-props": 0,
+    "react/no-unused-prop-types": 1,
+    "consistent-return": 0,
+    "no-nested-ternary": 0,
+    "no-unused-vars": 0,
+    "no-underscore-dangle": 0,
+    "no-console": 0,
+    "no-debugger": 1,
+    "no-unused-expressions": 0,
+    "no-use-before-define": 0,
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "(err|error|Error|_)$",
+        "varsIgnorePattern": "(err|error|Error|_)$"
+      }
+    ],
+    "jsx-a11y/media-has-caption": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": ["off", { "ignoreRestArgs": true }],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "no-restricted-syntax": 0,
+    "no-prototype-builtins": 0,
+    "no-param-reassign": 0,
+    "dot-notation": 0,
+    "no-unneeded-ternary": 0,
+    "prefer-destructuring": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
