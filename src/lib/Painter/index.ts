@@ -43,13 +43,12 @@ export default class Painter {
         this.thickness = thickness || 3;
         this.emitter = new EventEmitter();
         this.removeDrawEvent = () => {};
-
-        this.addDrawEvent();
     }
 
     setTarget(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
+        this.addDrawEvent();
     }
 
     on(name: 'drawStart' | 'draw' | 'drawEnd' | 'figures', listener: Listener) {
@@ -62,7 +61,10 @@ export default class Painter {
     ) {
         if (!this.canvas) return;
         this.canvas.addEventListener(name, callback);
-        return () => this.canvas!.removeEventListener(name, callback);
+
+        return () => {
+            this.canvas!.removeEventListener(name, callback);
+        };
     }
 
     drawStart() {
@@ -79,11 +81,13 @@ export default class Painter {
             this.ctx!.lineTo(drawX, drawY);
             this.ctx!.stroke();
         }
+        this.emitter.emit('draw', position);
     }
 
     drawEnd() {
         this.isDrawing = false;
         this.ctx!.beginPath();
+        this.emitter.emit('drawEnd');
     }
 
     setOptions({ color, thickness }: DrawOption) {
@@ -104,7 +108,10 @@ export default class Painter {
                 e.preventDefault();
             }
             const rect = this.canvas!.getBoundingClientRect();
-            const position = { x: e.touches[0].clientX, y: e.touches[0].clientY - rect.top };
+            const position = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY - rect.top,
+            };
             this.draw(position);
         };
 
@@ -117,6 +124,7 @@ export default class Painter {
             this.add('touchmove', (e) => handleTouchMove(e)),
             this.add('touchend', () => this.drawEnd()),
         ];
+
         this.removeDrawEvent = () => canvasEvents.forEach((off) => off!());
     }
 
