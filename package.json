@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/jellymando/my-canvas-class.git",
-  "author": "dain <dikakng@rsupport.com>",
+  "author": "jellymando <cicikdi@naver.com>",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^4.3.2"
