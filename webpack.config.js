@@ -1,4 +1,7 @@
-const path = require('path');
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -8,9 +11,10 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     output: {
-        filename: 'build.js',
-        path: path.resolve(__dirname, 'dist/js'),
+        path: resolve(__dirname, 'dist'),
+        filename: 'js/build.js',
     },
+
     module: {
         rules: [
             {
@@ -26,7 +30,6 @@ module.exports = {
                 test: /\.jfif$/,
                 loader: 'file-loader',
                 options: {
-                    // 파일명 앞에 img/ 처럼 경로를 붙이면 그 경로에 생성된다.
                     name: 'img/[name].[ext]',
                 },
             },
@@ -37,6 +40,10 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './public/index.html',
+            minify: false,
         }),
     ],
+    optimization: {
+        minimizer: [new TerserPlugin({ extractComments: false })],
+    },
 };
