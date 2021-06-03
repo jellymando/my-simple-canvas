@@ -1,30 +1,6 @@
 import EventEmitter, { Listener } from './EventEmitter';
-import {
-    EventMap,
-    DrawType,
-    DrawThickness,
-    DrawColor,
-    DrawOption,
-    Figure,
-    FigureData,
-    RelativePosition,
-    DrawingEvent,
-} from './types';
-
-export interface DrawOptions {
-    touch?: Touch | MouseEvent;
-    position?: RelativePosition;
-}
-
-export interface PainterOptions {
-    color?: string | CanvasGradient | CanvasPattern;
-    thickness?: number;
-}
-
-export interface CanvasSize {
-    width: number;
-    height: number;
-}
+import { EventMap, PainterOption, FigureData, RelativePosition } from './types';
+import { storage, getDrawingOn, getFigures } from '../storage';
 
 export default class Painter {
     private canvas: null | HTMLCanvasElement;
@@ -32,15 +8,19 @@ export default class Painter {
     private isDrawing: boolean;
     private strokeColor: string | CanvasGradient | CanvasPattern;
     private thickness: number;
+    private positions: RelativePosition[];
+    private figures: FigureData[];
     private emitter: EventEmitter;
     private removeDrawEvent: () => void;
 
-    constructor({ color, thickness }: PainterOptions) {
+    constructor({ color, thickness }: PainterOption) {
         this.canvas = null;
         this.ctx = null;
-        this.isDrawing = false;
+        this.isDrawing = getDrawingOn();
         this.strokeColor = color || 'red';
         this.thickness = thickness || 3;
+        this.positions = [];
+        this.figures = getFigures();
         this.emitter = new EventEmitter();
         this.removeDrawEvent = () => {};
     }
@@ -49,6 +29,7 @@ export default class Painter {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.addDrawEvent();
+        if (this.isDrawing && this.figures.length > 0) this.redraw();
     }
 
     on(name: 'drawStart' | 'draw' | 'drawEnd' | 'figures', listener: Listener) {
@@ -72,27 +53,59 @@ export default class Painter {
         this.setOptions({ color: this.strokeColor, thickness: this.thickness });
     }
 
-    draw(position: RelativePosition) {
+    draw(position: RelativePosition, redraw = false) {
+        if (!this.ctx) return;
+
         const drawX = position!.x;
         const drawY = position!.y;
+
         if (!this.isDrawing) {
-            this.ctx!.beginPath();
+            this.ctx.beginPath();
         } else {
-            this.ctx!.lineTo(drawX, drawY);
-            this.ctx!.stroke();
+            this.ctx.lineTo(drawX, drawY);
+            this.ctx.stroke();
         }
-        this.emitter.emit('draw', position);
+        if (!redraw) {
+            this.positions.push(position);
+            this.emitter.emit('draw', position);
+        }
     }
 
     drawEnd() {
         this.isDrawing = false;
         this.ctx!.beginPath();
+        this.setFigures();
         this.emitter.emit('drawEnd');
     }
 
-    setOptions({ color, thickness }: DrawOption) {
-        this.ctx!.strokeStyle = color;
-        this.ctx!.lineWidth = thickness;
+    redraw() {
+        for (const figure of this.figures) {
+            this.setOptions(figure.painterOption);
+            figure.positions.forEach((position) => {
+                this.draw(position, true);
+            });
+            this.ctx!.beginPath();
+        }
+    }
+
+    setOptions({ color, thickness }: PainterOption) {
+        if (!this.ctx) return;
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = thickness;
+    }
+
+    getFigures() {
+        this.figures = getFigures();
+    }
+
+    setFigures() {
+        this.figures.push({
+            painterOption: { color: this.strokeColor, thickness: this.thickness },
+            positions: this.positions,
+        });
+        storage.set('figures', this.figures);
+        this.positions = [];
+        this.emitter.emit('figures');
     }
 
     addDrawEvent() {
@@ -108,10 +121,7 @@ export default class Painter {
                 e.preventDefault();
             }
             const rect = this.canvas!.getBoundingClientRect();
-            const position = {
-                x: e.touches[0].clientX,
-                y: e.touches[0].clientY - rect.top,
-            };
+            const position = { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
             this.draw(position);
         };
 
@@ -135,5 +145,6 @@ export default class Painter {
     destroy() {
         this.removeDrawEvent();
         this.emitter.allOff();
+        storage.remove('figures');
     }
 }
