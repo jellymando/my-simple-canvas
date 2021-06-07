@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import Painter from './Painter';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default Painter;
+export { Painter };

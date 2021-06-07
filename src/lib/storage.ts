@@ -1,4 +1,4 @@
-import { FigureData } from './Painter/types';
+import { FigureData } from '../Painter/types';
 
 const ROOT_KEY = <const>'painter';
 
