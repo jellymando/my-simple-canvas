@@ -1,6 +1,6 @@
 import EventEmitter, { Listener } from './EventEmitter';
 import { EventMap, PainterOption, FigureData, RelativePosition } from './types';
-import { storage, getDrawingOn, getFigures } from '../storage';
+import { storage, getDrawingOn, getFigures } from '../lib/storage';
 
 export default class Painter {
     private canvas: null | HTMLCanvasElement;
