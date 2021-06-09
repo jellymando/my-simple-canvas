@@ -1,4 +1,3 @@
-import Painter from './Painter';
-
+import Painter from "./Painter";
 export default Painter;
 export { Painter };

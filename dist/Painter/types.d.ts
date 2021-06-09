@@ -1,0 +1,21 @@
+export declare type EventMap<Element = HTMLElement> = Element extends Document ? DocumentEventMap : HTMLElementEventMap;
+export declare type RelativePosition = {
+    x: number;
+    y: number;
+};
+export interface PainterOption {
+    color: string | CanvasGradient | CanvasPattern;
+    thickness: number;
+}
+export interface CanvasSize {
+    width: number;
+    height: number;
+}
+export interface DrawingEvent {
+    originalEvent: MouseEvent | TouchEvent;
+    relativePosition: RelativePosition;
+}
+export interface FigureData {
+    painterOption: PainterOption;
+    positions: RelativePosition[];
+}
