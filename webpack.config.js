@@ -13,6 +13,7 @@ module.exports = {
   output: {
     path: resolve(__dirname, "dist"),
     filename: "index.js",
+    libraryTarget: "umd",
   },
 
   module: {
@@ -22,7 +23,7 @@ module.exports = {
         exclude: "/node_modules/",
         loader: "babel-loader",
       },
-      { test: /\.tsx?$/, loader: "ts-loader" },
+      { test: /\.ts$/, loader: "ts-loader" },
     ],
   },
   plugins: [new CleanWebpackPlugin()],
