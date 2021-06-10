@@ -16,9 +16,9 @@ export default class Painter {
     setTarget(canvas: HTMLCanvasElement): void;
     on(name: "drawStart" | "draw" | "drawEnd" | "figures", listener: (...args: any[]) => void): EventEmitter;
     add<Event extends keyof EventMap<HTMLCanvasElement>>(name: Event, callback: (event: EventMap<HTMLCanvasElement>[Event]) => void): () => void;
-    drawStart(): void;
+    drawStart(painterOption?: PainterOption): void;
     draw(position: RelativePosition, redraw?: boolean): void;
-    drawEnd(): void;
+    drawEnd(redraw?: boolean): void;
     redraw(): void;
     setOptions({ color, thickness }: PainterOption): void;
     getFigures(): void;
