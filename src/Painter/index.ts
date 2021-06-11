@@ -30,7 +30,7 @@ export default class Painter {
 
   setTarget(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
-    this.ctx = canvas!.getContext("2d");
+    this.ctx = canvas.getContext("2d");
     this.addDrawEvent();
     if (this.drawOn && this.figures.length > 0) this.redraw();
   }
