@@ -6,6 +6,7 @@ export declare type RelativePosition = {
 export interface PainterOption {
     color: string | CanvasGradient | CanvasPattern;
     thickness: number;
+    canvas?: HTMLCanvasElement;
 }
 export interface CanvasSize {
     width: number;

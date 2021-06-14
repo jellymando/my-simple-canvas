@@ -15,9 +15,9 @@ export default class Painter {
   private emitter: EventEmitter;
   private removeDrawEvent: () => void;
 
-  constructor({ color, thickness }: PainterOption) {
-    this.canvas = null;
-    this.ctx = null;
+  constructor({ color, thickness, canvas }: PainterOption) {
+    this.canvas = canvas ? canvas : null;
+    this.ctx = canvas ? canvas.getContext("2d") : null;
     this.drawOn = getDrawOn();
     this.isDrawing = false;
     this.strokeColor = color || "red";
@@ -26,13 +26,11 @@ export default class Painter {
     this.figures = getFigures();
     this.emitter = new EventEmitter();
     this.removeDrawEvent = () => {};
-  }
 
-  setTarget(canvas: HTMLCanvasElement) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext("2d");
-    this.addDrawEvent();
-    if (this.drawOn && this.figures.length > 0) this.redraw();
+    if (canvas) {
+      this.addDrawEvent();
+      if (this.drawOn && this.figures.length > 0) this.redraw();
+    }
   }
 
   on(
@@ -98,6 +96,14 @@ export default class Painter {
     }
   }
 
+  setTarget(canvas: HTMLCanvasElement) {
+    if (!canvas) return;
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.addDrawEvent();
+    if (this.drawOn && this.figures.length > 0) this.redraw();
+  }
+
   setOptions({ color, thickness }: PainterOption) {
     if (!this.ctx) return;
     this.ctx.strokeStyle = color;
@@ -122,7 +128,7 @@ export default class Painter {
     if (!this.canvas) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const position = { x: e.clientX, y: e.clientY };
+      const position = { x: e.offsetX, y: e.offsetY };
       this.draw(position);
     };
 
