@@ -1,7 +1,8 @@
 // import EventEmitter, { Listener } from './EventEmitter';
 import EventEmitter from "events";
 import { EventMap, PainterOption, FigureData, RelativePosition } from "./types";
-import { storage, getDrawOn, getFigures } from "../lib/storage";
+import { storage, getDrawOn, getFigures } from "lib/storage";
+import paintBrush from "images/paint-brush.png";
 
 export default class Painter {
   private canvas: null | HTMLCanvasElement;
@@ -10,27 +11,24 @@ export default class Painter {
   private isDrawing: boolean;
   private strokeColor: string | CanvasGradient | CanvasPattern;
   private thickness: number;
+  private paintBrush: boolean;
   private positions: RelativePosition[];
   private figures: FigureData[];
   private emitter: EventEmitter;
   private removeDrawEvent: () => void;
 
-  constructor({ color, thickness, canvas }: PainterOption) {
-    this.canvas = canvas ? canvas : null;
-    this.ctx = canvas ? canvas.getContext("2d") : null;
+  constructor() {
+    this.canvas = null;
+    this.ctx = null;
     this.drawOn = getDrawOn();
     this.isDrawing = false;
-    this.strokeColor = color || "red";
-    this.thickness = thickness || 3;
+    this.strokeColor = "red";
+    this.thickness = 3;
+    this.paintBrush = true;
     this.positions = [];
     this.figures = getFigures();
     this.emitter = new EventEmitter();
     this.removeDrawEvent = () => {};
-
-    if (canvas) {
-      this.addDrawEvent();
-      if (this.drawOn && this.figures.length > 0) this.redraw();
-    }
   }
 
   on(
@@ -100,16 +98,24 @@ export default class Painter {
     if (!canvas) return;
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
+    this.setCursor();
     this.addDrawEvent();
     if (this.drawOn && this.figures.length > 0) this.redraw();
   }
 
-  setOptions({ color, thickness }: PainterOption) {
+  setOptions({ color, thickness, paintBrush }: PainterOption) {
     if (!this.ctx) return;
-    this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = thickness;
+    if (color) this.ctx.strokeStyle = color;
+    if (thickness) this.ctx.lineWidth = thickness;
+    if (paintBrush) {
+      this.paintBrush = paintBrush;
+      this.setCursor();
+    }
   }
 
+  setCursor() {
+    if (this.paintBrush) this.canvas.style.cursor = `url(${paintBrush}), auto`;
+  }
   getFigures() {
     this.figures = getFigures();
   }
@@ -128,7 +134,10 @@ export default class Painter {
     if (!this.canvas) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const position = { x: e.offsetX, y: e.offsetY };
+      const position = {
+        x: e.offsetX,
+        y: e.offsetY + (this.paintBrush && 56),
+      };
       this.draw(position);
     };
 

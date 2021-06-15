@@ -4,9 +4,9 @@ export declare type RelativePosition = {
     y: number;
 };
 export interface PainterOption {
-    color: string | CanvasGradient | CanvasPattern;
-    thickness: number;
-    canvas?: HTMLCanvasElement;
+    color?: string | CanvasGradient | CanvasPattern;
+    thickness?: number;
+    paintBrush?: boolean;
 }
 export interface CanvasSize {
     width: number;

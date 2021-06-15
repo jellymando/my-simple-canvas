@@ -4,9 +4,9 @@ export type EventMap<Element = HTMLElement> = Element extends Document
 export type RelativePosition = { x: number; y: number };
 
 export interface PainterOption {
-  color: string | CanvasGradient | CanvasPattern;
-  thickness: number;
-  canvas?: HTMLCanvasElement;
+  color?: string | CanvasGradient | CanvasPattern;
+  thickness?: number;
+  paintBrush?: boolean;
 }
 
 export interface CanvasSize {
