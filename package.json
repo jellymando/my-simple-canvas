@@ -26,5 +26,9 @@
   "scripts": {
     "dev": "webpack serve --progress --mode development",
     "build": "webpack --progress --mode production"
+  },
+  "dependencies": {
+    "react-scripts": "^4.0.3",
+    "url-loader": "^4.1.1"
   }
 }

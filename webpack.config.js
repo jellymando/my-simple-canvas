@@ -8,13 +8,13 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js"],
+    modules: [resolve(__dirname, "src"), "node_modules"],
   },
   output: {
     path: resolve(__dirname, "dist"),
     filename: "index.js",
     libraryTarget: "umd",
   },
-
   module: {
     rules: [
       {
@@ -23,6 +23,13 @@ module.exports = {
         loader: "babel-loader",
       },
       { test: /\.ts$/, loader: "ts-loader" },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        loader: "url-loader",
+        options: {
+          limit: 8192,
+        },
+      },
     ],
   },
   plugins: [new CleanWebpackPlugin()],
