@@ -1,4 +1,3 @@
-// import EventEmitter, { Listener } from './EventEmitter';
 import EventEmitter from "events";
 import { EventMap, PainterOption, FigureData, RelativePosition } from "./types";
 import { storage, getDrawOn, getFigures } from "lib/storage";
