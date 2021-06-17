@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "sourceMap": true, // 소스맵(*.map) 파일 생성 여부
+    "jsx": "react",
     "esModuleInterop": true, // import * as => import
     "outDir": "./dist",
     "declaration": true,

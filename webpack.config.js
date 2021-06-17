@@ -7,7 +7,7 @@ module.exports = {
     main: "./src/index.ts",
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
     modules: [resolve(__dirname, "src"), "node_modules"],
   },
   output: {
@@ -15,14 +15,15 @@ module.exports = {
     filename: "index.js",
     libraryTarget: "umd",
   },
+  externals: ["react", "react-dom"],
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: "/node_modules/",
         loader: "babel-loader",
       },
-      { test: /\.ts$/, loader: "ts-loader" },
+      { test: /\.(ts|tsx)$/, loader: "ts-loader" },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
         loader: "url-loader",
