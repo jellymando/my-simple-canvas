@@ -3,7 +3,7 @@ import { EventMap, PainterOption, FigureData, RelativePosition } from "./types";
 import { storage, getDrawOn, getFigures } from "lib/storage";
 import paintBrush from "images/paint-brush.png";
 
-export default class Painter {
+export class Painter {
   private canvas: null | HTMLCanvasElement;
   private ctx: null | CanvasRenderingContext2D;
   private drawOn: boolean;
@@ -104,8 +104,14 @@ export default class Painter {
 
   setOptions({ color, thickness, paintBrush }: PainterOption) {
     if (!this.ctx) return;
-    if (color) this.ctx.strokeStyle = color;
-    if (thickness) this.ctx.lineWidth = thickness;
+    if (color) {
+      this.strokeColor = color;
+      this.ctx.strokeStyle = color;
+    }
+    if (thickness) {
+      this.thickness = thickness;
+      this.ctx.lineWidth = thickness;
+    }
     if (paintBrush) {
       this.paintBrush = paintBrush;
       this.setCursor();
@@ -115,6 +121,7 @@ export default class Painter {
   setCursor() {
     if (this.paintBrush) this.canvas.style.cursor = `url(${paintBrush}), auto`;
   }
+  
   getFigures() {
     this.figures = getFigures();
   }

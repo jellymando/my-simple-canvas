@@ -1,3 +1,6 @@
-import Painter from "./Painter";
-export default Painter;
-export { Painter };
+declare type SimplePainterProps = {
+    width?: number;
+    height?: number;
+};
+export declare const SimpleCanvas: ({ width, height }: SimplePainterProps) => any;
+export {};

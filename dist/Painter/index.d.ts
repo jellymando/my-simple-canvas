@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import EventEmitter from "events";
 import { EventMap, PainterOption, RelativePosition } from "./types";
-export default class Painter {
+export declare class Painter {
     private canvas;
     private ctx;
     private drawOn;

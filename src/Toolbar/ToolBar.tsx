@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Painter } from 'Painter';
 import { paletteColor } from "../lib/color";
 import { ControlItem } from "./ControlItem";
 import { RangeItem } from "./RangeItem";
@@ -7,6 +8,7 @@ import { ControlBar, Separator } from "./styled";
 import { Eraser } from "./Icons";
 
 type ToolBarProps = {
+  painter: Painter;
   useThickness?: boolean;
   minTickness?: number;
   maxTickness?: number;
@@ -15,6 +17,7 @@ type ToolBarProps = {
 };
 
 export const ToolBar = ({
+  painter,
   useThickness = true,
   minTickness = 1,
   maxTickness = 5,
@@ -31,7 +34,7 @@ export const ToolBar = ({
       <ControlBar>
         {useThickness && (
           <>
-            <RangeItem minTickness={minTickness} maxTickness={maxTickness} />
+            <RangeItem painter={painter} minTickness={minTickness} maxTickness={maxTickness} />
             <Separator />
           </>
         )}
