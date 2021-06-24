@@ -2,7 +2,7 @@
 import EventEmitter from "events";
 import { EventMap, PainterOption, RelativePosition } from "./types";
 export declare class Painter {
-    private canvas;
+    private $canvas;
     private ctx;
     private drawOn;
     private isDrawing;

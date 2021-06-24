@@ -7,7 +7,7 @@ import { ColorItem } from "./ColorItem";
 import { ControlBar, Separator } from "./styled";
 import { Eraser } from "./Icons";
 
-type ToolBarProps = {
+type ToolbarProps = {
   painter: Painter;
   useThickness?: boolean;
   minTickness?: number;
@@ -16,14 +16,14 @@ type ToolBarProps = {
   colors?: object;
 };
 
-export const ToolBar = ({
+export const Toolbar = ({
   painter,
   useThickness = true,
   minTickness = 1,
   maxTickness = 5,
   useColor = true,
   colors,
-}: ToolBarProps) => {
+}: ToolbarProps) => {
   const [selectedItem, setSelectedItem] = useState("");
   const handleSelectItem = (item: string) => {
     setSelectedItem(selectedItem !== item ? item : "");

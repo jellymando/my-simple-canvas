@@ -1,5 +1,5 @@
 import { Painter } from 'Painter';
-declare type ToolBarProps = {
+declare type ToolbarProps = {
     painter: Painter;
     useThickness?: boolean;
     minTickness?: number;
@@ -7,5 +7,5 @@ declare type ToolBarProps = {
     useColor?: boolean;
     colors?: object;
 };
-export declare const ToolBar: ({ painter, useThickness, minTickness, maxTickness, useColor, colors, }: ToolBarProps) => any;
+export declare const Toolbar: ({ painter, useThickness, minTickness, maxTickness, useColor, colors, }: ToolbarProps) => any;
 export {};

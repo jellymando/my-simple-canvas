@@ -1,14 +1,24 @@
 import React, { useRef, useEffect } from 'react';
 import { Painter } from "./Painter";
-import { ToolBar } from "./Toolbar";
+import { Toolbar } from "./Toolbar";
 
-type SimplePainterProps = {
+type SimpleCanvasProps = {
     width?: number;
     height?: number;
 }
 
-export const SimpleCanvas = ({ width = 500, height = 600 }: SimplePainterProps) => {
-    const painter = new Painter();
+type SimpleCanvasToolbarProps = {
+    painter: Painter;
+    useThickness?: boolean;
+    minTickness?: number;
+    maxTickness?: number;
+    useColor?: boolean;
+    colors?: object;
+  };
+
+const painter = new Painter();
+  
+export const SimpleCanvas = ({ width = 500, height = 600 }: SimpleCanvasProps) => {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -16,9 +26,12 @@ export const SimpleCanvas = ({ width = 500, height = 600 }: SimplePainterProps) 
       }, [canvasRef]);
 
     return (
-        <>
-            <ToolBar painter={painter} />
-            <canvas id="my-simple-canvas" ref={canvasRef} width={width} height={height} style={{ border: "1px solid gray" }}></canvas>
-        </>
+      <canvas id="my-simple-canvas" ref={canvasRef} width={width} height={height} style={{ border: "1px solid gray" }}></canvas>
     )
 }
+
+export const SimpleToolbar = (props: SimpleCanvasToolbarProps) => {
+    return (
+      <Toolbar painter={painter} {...props} />
+    )
+  }

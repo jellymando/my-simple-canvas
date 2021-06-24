@@ -4,7 +4,7 @@ import { storage, getDrawOn, getFigures } from "lib/storage";
 import paintBrush from "images/paint-brush.png";
 
 export class Painter {
-  private canvas: null | HTMLCanvasElement;
+  private $canvas: null | HTMLCanvasElement;
   private ctx: null | CanvasRenderingContext2D;
   private drawOn: boolean;
   private isDrawing: boolean;
@@ -17,7 +17,7 @@ export class Painter {
   private removeDrawEvent: () => void;
 
   constructor() {
-    this.canvas = null;
+    this.$canvas = null;
     this.ctx = null;
     this.drawOn = getDrawOn();
     this.isDrawing = false;
@@ -41,11 +41,11 @@ export class Painter {
     name: Event,
     callback: (event: EventMap<HTMLCanvasElement>[Event]) => void
   ) {
-    if (!this.canvas) return;
-    this.canvas.addEventListener(name, callback);
+    if (!this.$canvas) return;
+    this.$canvas.addEventListener(name, callback);
 
     return () => {
-      this.canvas!.removeEventListener(name, callback);
+      this.$canvas!.removeEventListener(name, callback);
     };
   }
 
@@ -95,7 +95,7 @@ export class Painter {
 
   setTarget(canvas: HTMLCanvasElement) {
     if (!canvas) return;
-    this.canvas = canvas;
+    this.$canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.setCursor();
     this.addDrawEvent();
@@ -119,7 +119,7 @@ export class Painter {
   }
 
   setCursor() {
-    if (this.paintBrush) this.canvas.style.cursor = `url(${paintBrush}), auto`;
+    if (this.paintBrush) this.$canvas.style.cursor = `url(${paintBrush}), auto`;
   }
   
   getFigures() {
@@ -137,7 +137,7 @@ export class Painter {
   }
 
   addDrawEvent() {
-    if (!this.canvas) return;
+    if (!this.$canvas) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const position = {
@@ -148,10 +148,10 @@ export class Painter {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (e.target === this.canvas) {
+      if (e.target === this.$canvas) {
         e.preventDefault();
       }
-      const rect = this.canvas!.getBoundingClientRect();
+      const rect = this.$canvas!.getBoundingClientRect();
       const position = {
         x: e.touches[0].clientX - rect.left,
         y: e.touches[0].clientY - rect.top,
@@ -176,8 +176,8 @@ export class Painter {
     this.ctx!.clearRect(
       0,
       0,
-      this.canvas!.clientWidth,
-      this.canvas!.clientHeight
+      this.$canvas!.clientWidth,
+      this.$canvas!.clientHeight
     );
   }
 
