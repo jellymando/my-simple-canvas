@@ -8,12 +8,4 @@ export declare const color: {
     readonly green70: "#22a622";
     readonly green50: "#55b955";
 };
-export declare const paletteColor: {
-    readonly red1: "#f03434";
-    readonly orange1: "#f9690e";
-    readonly yellow1: "#ffff7e";
-    readonly green1: "#29f1c3";
-    readonly blue1: "#22a7f0";
-    readonly purple1: "#9f5afd";
-    readonly purple2: "#8c14fc";
-};
+export declare const paletteColor: string[];

@@ -5,7 +5,7 @@ declare type ToolbarProps = {
     minTickness?: number;
     maxTickness?: number;
     useColor?: boolean;
-    colors?: object;
+    colors?: string | string[];
 };
 export declare const Toolbar: ({ painter, useThickness, minTickness, maxTickness, useColor, colors, }: ToolbarProps) => any;
 export {};

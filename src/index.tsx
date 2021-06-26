@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Painter } from "./Painter";
 import { Toolbar } from "./Toolbar";
 
@@ -13,7 +13,7 @@ type SimpleCanvasToolbarProps = {
     minTickness?: number;
     maxTickness?: number;
     useColor?: boolean;
-    colors?: object;
+    colors?: string | string[];
   };
 
 const painter = new Painter();
@@ -31,7 +31,13 @@ export const SimpleCanvas = ({ width = 500, height = 600 }: SimpleCanvasProps) =
 }
 
 export const SimpleToolbar = (props: SimpleCanvasToolbarProps) => {
+    const [show, setShow] = useState(false);
+
+    useEffect(()=>{
+      SimpleCanvas && setShow(true);
+    }, [SimpleCanvas]);
+
     return (
-      <Toolbar painter={painter} {...props} />
+      show && <Toolbar painter={painter} {...props} />
     )
   }

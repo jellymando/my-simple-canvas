@@ -1,5 +1,7 @@
+import { Painter } from "../Painter";
 declare type ColorItemProps = {
-    colors: object;
+    painter: Painter;
+    colors: string | string[];
 };
-export declare const ColorItem: ({ colors }: ColorItemProps) => any[];
+export declare const ColorItem: ({ painter, colors }: ColorItemProps) => any;
 export {};

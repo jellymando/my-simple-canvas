@@ -9,7 +9,7 @@ declare type SimpleCanvasToolbarProps = {
     minTickness?: number;
     maxTickness?: number;
     useColor?: boolean;
-    colors?: object;
+    colors?: string | string[];
 };
 export declare const SimpleCanvas: ({ width, height }: SimpleCanvasProps) => any;
 export declare const SimpleToolbar: (props: SimpleCanvasToolbarProps) => any;

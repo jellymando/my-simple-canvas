@@ -5,6 +5,11 @@ type ItemProps = {
   disable?: boolean;
 };
 
+type RoundProps = {
+  active: boolean;
+  color: string;
+};
+
 export const ControlBar = styled.div`
   position: fixed;
   top: 0;
@@ -64,7 +69,7 @@ export const Range = styled.input`
   height: 20px;
 `;
 
-export const Round = styled.span<{ color: string }>`
+export const Round = styled.span<RoundProps>`
   width: 20px;
   height: 20px;
   border: solid 1px rgba(0, 0, 0, 0.5);
@@ -74,6 +79,12 @@ export const Round = styled.span<{ color: string }>`
   &:last-child {
     margin-right: 0;
   }
+
+  ${({ active }) =>
+    active &&
+    css`
+      border: 2px solid #f9f9f9;
+    `}
 
   ${({ color }) =>
     color &&

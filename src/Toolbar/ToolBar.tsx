@@ -13,7 +13,7 @@ type ToolbarProps = {
   minTickness?: number;
   maxTickness?: number;
   useColor?: boolean;
-  colors?: object;
+  colors?: string | string[];
 };
 
 export const Toolbar = ({
@@ -40,7 +40,7 @@ export const Toolbar = ({
         )}
         {useColor && (
           <>
-            <ColorItem colors={colors || paletteColor} />
+            <ColorItem painter={painter} colors={colors || paletteColor} />
             <Separator />
           </>
         )}

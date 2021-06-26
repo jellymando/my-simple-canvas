@@ -18,6 +18,10 @@ export const RangeItem = ({ painter, minTickness, maxTickness }: RangeItemProps)
 
   useEffect(()=>{
     if(rangeRef.current) rangeRef.current.addEventListener('input', handleThickness);
+
+    return () => {
+      rangeRef.current.removeEventListener('input', handleThickness);
+    }
   }, [rangeRef])
 
   return (

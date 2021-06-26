@@ -9,12 +9,4 @@ export const color = <const>{
   green50: "#55b955",
 };
 
-export const paletteColor = <const>{
-  red1: "#f03434",
-  orange1: "#f9690e",
-  yellow1: "#ffff7e",
-  green1: "#29f1c3",
-  blue1: "#22a7f0",
-  purple1: "#9f5afd",
-  purple2: "#8c14fc",
-};
+export const paletteColor = ["#f03434", "#f9690e", "#ffff7e", "#29f1c3", "#22a7f0", "#9f5afd", "#8c14fc"];
