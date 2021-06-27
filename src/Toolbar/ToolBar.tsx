@@ -5,7 +5,7 @@ import { ControlItem } from "./ControlItem";
 import { RangeItem } from "./RangeItem";
 import { ColorItem } from "./ColorItem";
 import { ControlBar, Separator } from "./styled";
-import { Eraser } from "./Icons";
+import { Icon } from "./Icons";
 
 type ToolbarProps = {
   painter: Painter;
@@ -45,10 +45,16 @@ export const Toolbar = ({
           </>
         )}
         <ControlItem
-          active={selectedItem === "eraser"}
+          active={selectedItem === "allClear"}
           onSelectItem={handleSelectItem}
         >
-          <Eraser />
+          <Icon name="allClear" />
+        </ControlItem>
+        <ControlItem
+          active={selectedItem === "save"}
+          onSelectItem={handleSelectItem}
+        >
+          <Icon name="save" />
         </ControlItem>
       </ControlBar>
     </>

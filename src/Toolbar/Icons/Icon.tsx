@@ -1,7 +1,6 @@
 import React from "react";
 import AllClear from "./AllClear";
-import Draw from "./Draw";
-import Eraser from "./Eraser";
+import Save from "./Save";
 
 type IconProps = {
   name: string;
@@ -12,9 +11,7 @@ export const Icon = ({ name: iconName }: IconProps) => {
     case "allClear":
       return <AllClear />;
     case "draw":
-      return <Draw />;
-    case "eraser":
-      return <Eraser />;
+      return <Save />;
     default:
       return <></>;
   }
