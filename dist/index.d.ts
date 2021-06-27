@@ -1,10 +1,8 @@
-import { Painter } from "./Painter";
 declare type SimpleCanvasProps = {
     width?: number;
     height?: number;
 };
 declare type SimpleCanvasToolbarProps = {
-    painter: Painter;
     useThickness?: boolean;
     minTickness?: number;
     maxTickness?: number;

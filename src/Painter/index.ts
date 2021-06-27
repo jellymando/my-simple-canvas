@@ -1,4 +1,3 @@
-import EventEmitter from "events";
 import { EventMap, PainterOption, FigureData, RelativePosition } from "./types";
 import { storage, getDrawOn, getFigures } from "lib/storage";
 import paintBrush from "images/paint-brush.png";
@@ -13,7 +12,6 @@ export class Painter {
   private paintBrush: boolean;
   private positions: RelativePosition[];
   private figures: FigureData[];
-  private emitter: EventEmitter;
   private removeDrawEvent: () => void;
 
   constructor() {
@@ -26,15 +24,7 @@ export class Painter {
     this.paintBrush = true;
     this.positions = [];
     this.figures = getFigures();
-    this.emitter = new EventEmitter();
     this.removeDrawEvent = () => {};
-  }
-
-  on(
-    name: "drawStart" | "draw" | "drawEnd" | "figures",
-    listener: (...args: any[]) => void
-  ) {
-    return this.emitter.on(name, listener);
   }
 
   add<Event extends keyof EventMap<HTMLCanvasElement>>(
@@ -70,7 +60,6 @@ export class Painter {
     }
     if (!redraw) {
       this.positions.push(position);
-      this.emitter.emit("draw", position);
     }
   }
 
@@ -79,7 +68,6 @@ export class Painter {
     this.ctx!.beginPath();
     if (!redraw) {
       this.setFigures();
-      this.emitter.emit("drawEnd");
     }
   }
 
@@ -133,7 +121,6 @@ export class Painter {
     });
     storage.set("figures", this.figures);
     this.positions = [];
-    this.emitter.emit("figures");
   }
 
   addDrawEvent() {
@@ -183,7 +170,6 @@ export class Painter {
 
   destroy() {
     this.removeDrawEvent();
-    this.emitter.removeAllListeners();
     storage.remove("figures");
   }
 }
