@@ -10,7 +10,7 @@ export const Icon = ({ name: iconName }: IconProps) => {
   switch (iconName) {
     case "allClear":
       return <AllClear />;
-    case "draw":
+    case "save":
       return <Save />;
     default:
       return <></>;
