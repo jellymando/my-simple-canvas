@@ -1,4 +1,4 @@
-export default function AllClear({ width, height, viewBox, color, }: {
+export default function Save({ width, height, viewBox, color, }: {
     width?: string;
     height?: string;
     viewBox?: string;

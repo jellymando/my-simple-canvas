@@ -21,7 +21,7 @@ export const ControlBar = styled.div`
   border-radius: 6px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.65);
   transform: translateX(-50%);
   box-sizing: border-box;
 `;
@@ -43,18 +43,18 @@ export const Item = styled.div<ItemProps>`
 
   &:hover {
     border: solid 1px rgba(255, 255, 255, 0.2);
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
   ${({ active }) =>
     active &&
     css`
       border: solid 1px rgba(255, 255, 255, 0.3);
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.3);
 
       &:hover {
         border: solid 1px rgba(255, 255, 255, 0.3);
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.35);
       }
     `}
 `;

@@ -24,9 +24,12 @@ export const Toolbar = ({
   useColor = true,
   colors,
 }: ToolbarProps) => {
-  const [selectedItem, setSelectedItem] = useState("");
-  const handleSelectItem = (item: string) => {
-    setSelectedItem(selectedItem !== item ? item : "");
+  const handleAllClear = () => {
+    painter.clear();
+  };
+
+  const handleSave = () => {
+    painter.save();
   };
 
   return (
@@ -45,14 +48,14 @@ export const Toolbar = ({
           </>
         )}
         <ControlItem
-          active={selectedItem === "allClear"}
-          onSelectItem={handleSelectItem}
+          title="All Clear"
+          onClickItem={handleAllClear}
         >
           <Icon name="allClear" />
         </ControlItem>
         <ControlItem
-          active={selectedItem === "save"}
-          onSelectItem={handleSelectItem}
+          title="Save"
+          onClickItem={handleSave}
         >
           <Icon name="save" />
         </ControlItem>

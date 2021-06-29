@@ -19,13 +19,13 @@ If you only use `SimpleCanvas`, React is not necessary.
 #### with yarn
 
 ```js
-$ yarn add react-simple-modal-provider
+$ yarn add react-simple-modal
 ```
 
 #### with npm
 
 ```js
-$ npm install react-simple-modal-provider
+$ npm install react-simple-modal
 ```
 
 ## Examples

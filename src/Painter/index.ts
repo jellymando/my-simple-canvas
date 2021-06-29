@@ -159,6 +159,14 @@ export class Painter {
     this.removeDrawEvent = () => canvasEvents.forEach((off) => off!());
   }
 
+  save() {
+    const image = this.$canvas.toDataURL("image/jpeg");
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "your_paint";
+    link.click();
+  }
+
   clear() {
     this.ctx!.clearRect(
       0,
