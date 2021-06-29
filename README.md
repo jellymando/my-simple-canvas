@@ -50,15 +50,15 @@ export default function App() {
 
 | Name     | Type     | Default | Description                      |
 | -------- | -------- | ------- | -------------------------------- |
-| `width`  | `number` | `500`   | HTML `<canvas>` width Attribute  |
-| `height` | `number` | `600`   | HTML `<canvas>` height Attribute |
+| `width`  | `number` | `500`   | HTML `<canvas>` Width Attribute  |
+| `height` | `number` | `600`   | HTML `<canvas>` Height Attribute |
 
 ### SimpleToolbar
 
-| Name           | Type                 | Default                                                                         | Description                                          |
-| -------------- | -------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `useThickness` | `boolean`            | `true`                                                                          | Whether to use thickness range input in the toolbar. |
-| `minTickness`  | `number`             | `1`                                                                             | Minimum thickness that can be set                    |
-| `maxTickness`  | `number`             | `5`                                                                             | Maximum thickness that can be set                    |
-| `useColor`     | `boolean`            | `true`                                                                          | Whether to use color palette in the toolbar.         |
-| `colors`       | `string or string[]` | `["#f03434", "#f9690e", "#ffff7e", "#29f1c3", "#22a7f0", "#9f5afd", "#8c14fc"]` | Colors of palette                                    |
+| Name           | Type                 | Default                                                                         | Description                                    |
+| -------------- | -------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `useThickness` | `boolean`            | `true`                                                                          | Whether to Use Thickness Option in the Toolbar |
+| `minTickness`  | `number`             | `1`                                                                             | Minimum Thickness That Can Be Set              |
+| `maxTickness`  | `number`             | `5`                                                                             | Maximum Thickness That Can Be Set              |
+| `useColor`     | `boolean`            | `true`                                                                          | Whether to Use Color Palette in the Toolbar    |
+| `colors`       | `string or string[]` | `["#f03434", "#f9690e", "#ffff7e", "#29f1c3", "#22a7f0", "#9f5afd", "#8c14fc"]` | Colors of Palette                              |
