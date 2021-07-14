@@ -2,6 +2,8 @@
 
 ### Usage
 
+<img src="https://user-images.githubusercontent.com/51523573/125589962-488c4ca8-3f83-45a0-acc2-c6021d2b48e5.gif">
+
 You’ll need to install React to use `SimpleToolbar`.
 
 If you only use `SimpleCanvas`, React is not necessary.
