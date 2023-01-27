@@ -1,6 +1,6 @@
 {
   "name": "my-simple-canvas",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/jellymando/my-canvas-class.git",
