@@ -109,7 +109,7 @@ export class Painter {
   setCursor() {
     if (this.paintBrush) this.$canvas.style.cursor = `url(${paintBrush}), auto`;
   }
-  
+
   getFigures() {
     this.figures = getFigures();
   }

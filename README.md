@@ -21,20 +21,20 @@ If you only use `SimpleCanvas`, React is not necessary.
 #### with yarn
 
 ```js
-$ yarn add react-simple-modal
+$ yarn add my-simple-canvas
 ```
 
 #### with npm
 
 ```js
-$ npm install react-simple-modal
+$ npm install my-simple-canvas
 ```
 
 ## Examples
 
 ```js
 import React from "react";
-import { SimpleToolbar, SimpleCanvas } from "./src";
+import { SimpleToolbar, SimpleCanvas } from "my-simple-canvas";
 
 export default function App() {
   return (
