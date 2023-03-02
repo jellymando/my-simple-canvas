@@ -5,7 +5,11 @@ export default function App() {
   return (
     <div className="App">
       <SimpleToolbar colors={["#000000", "red", "violet"]} />
-      <SimpleCanvas />
+      <SimpleCanvas
+        onDraw={(params) => {
+          console.log(params);
+        }}
+      />
     </div>
   );
 }

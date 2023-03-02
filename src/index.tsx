@@ -6,7 +6,7 @@ import { Toolbar } from "./Toolbar";
 type SimpleCanvasProps = {
   width?: number;
   height?: number;
-  onDraw?: () => void;
+  onDraw?: (params: any) => void;
 };
 
 type SimpleCanvasToolbarProps = {

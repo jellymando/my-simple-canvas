@@ -19,7 +19,7 @@ export declare class Painter {
     redraw(): void;
     setTarget({ target, onDraw }: {
         target: HTMLCanvasElement;
-        onDraw: () => void;
+        onDraw: (params: any) => void;
     }): void;
     setOptions({ color, thickness, paintBrush }: PainterOption): void;
     setCursor(): void;

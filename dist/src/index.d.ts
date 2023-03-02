@@ -1,7 +1,7 @@
 declare type SimpleCanvasProps = {
     width?: number;
     height?: number;
-    onDraw?: () => void;
+    onDraw?: (params: any) => void;
 };
 declare type SimpleCanvasToolbarProps = {
     useThickness?: boolean;

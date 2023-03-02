@@ -12,7 +12,7 @@ export class Painter {
   private paintBrush: boolean;
   private positions: RelativePosition[];
   private figures: FigureData[];
-  private onDraw: (any) => void | null;
+  private onDraw: (params: any) => void | null;
   private removeDrawEvent: () => void;
 
   constructor() {
@@ -89,7 +89,7 @@ export class Painter {
     onDraw
   }: {
     target: HTMLCanvasElement;
-    onDraw: () => void;
+    onDraw: (params: any) => void;
   }) {
     if (!target) return;
     this.$canvas = target;
