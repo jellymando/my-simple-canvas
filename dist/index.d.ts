@@ -1,6 +1,7 @@
 declare type SimpleCanvasProps = {
     width?: number;
     height?: number;
+    onDraw?: () => void;
 };
 declare type SimpleCanvasToolbarProps = {
     useThickness?: boolean;
@@ -9,6 +10,6 @@ declare type SimpleCanvasToolbarProps = {
     useColor?: boolean;
     colors?: string | string[];
 };
-export declare const SimpleCanvas: ({ width, height }: SimpleCanvasProps) => any;
+export declare const SimpleCanvas: ({ width, height, onDraw }: SimpleCanvasProps) => any;
 export declare const SimpleToolbar: (props: SimpleCanvasToolbarProps) => any;
 export {};

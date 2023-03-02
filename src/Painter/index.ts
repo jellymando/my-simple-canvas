@@ -12,6 +12,7 @@ export class Painter {
   private paintBrush: boolean;
   private positions: RelativePosition[];
   private figures: FigureData[];
+  private onDraw: (any) => void | null;
   private removeDrawEvent: () => void;
 
   constructor() {
@@ -24,6 +25,7 @@ export class Painter {
     this.paintBrush = true;
     this.positions = [];
     this.figures = getFigures();
+    this.onDraw = null;
     this.removeDrawEvent = () => {};
   }
 
@@ -57,6 +59,7 @@ export class Painter {
     } else {
       this.ctx.lineTo(drawX, drawY);
       this.ctx.stroke();
+      if (this.onDraw) this.onDraw({ x: drawX, y: drawY });
     }
     if (!redraw) {
       this.positions.push(position);
@@ -81,12 +84,19 @@ export class Painter {
     }
   }
 
-  setTarget(canvas: HTMLCanvasElement) {
-    if (!canvas) return;
-    this.$canvas = canvas;
-    this.ctx = canvas.getContext("2d");
+  setTarget({
+    target,
+    onDraw
+  }: {
+    target: HTMLCanvasElement;
+    onDraw: () => void;
+  }) {
+    if (!target) return;
+    this.$canvas = target;
+    this.ctx = target.getContext("2d");
     this.setCursor();
     this.addDrawEvent();
+    if (onDraw) this.onDraw = onDraw;
     if (this.drawOn && this.figures.length > 0) this.redraw();
   }
 
@@ -117,7 +127,7 @@ export class Painter {
   setFigures() {
     this.figures.push({
       painterOption: { color: this.strokeColor, thickness: this.thickness },
-      positions: this.positions,
+      positions: this.positions
     });
     storage.set("figures", this.figures);
     this.positions = [];
@@ -129,7 +139,7 @@ export class Painter {
     const handleMouseMove = (e: MouseEvent) => {
       const position = {
         x: e.offsetX,
-        y: e.offsetY + (this.paintBrush && 56),
+        y: e.offsetY + (this.paintBrush && 56)
       };
       this.draw(position);
     };
@@ -141,7 +151,7 @@ export class Painter {
       const rect = this.$canvas!.getBoundingClientRect();
       const position = {
         x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top,
+        y: e.touches[0].clientY - rect.top
       };
       this.draw(position);
     };
@@ -153,7 +163,7 @@ export class Painter {
       this.add("mouseleave", () => this.drawEnd()),
       this.add("touchstart", () => this.drawStart()),
       this.add("touchmove", (e) => handleTouchMove(e)),
-      this.add("touchend", () => this.drawEnd()),
+      this.add("touchend", () => this.drawEnd())
     ];
 
     this.removeDrawEvent = () => canvasEvents.forEach((off) => off!());

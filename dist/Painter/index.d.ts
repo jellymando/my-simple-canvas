@@ -9,6 +9,7 @@ export declare class Painter {
     private paintBrush;
     private positions;
     private figures;
+    private onDraw;
     private removeDrawEvent;
     constructor();
     add<Event extends keyof EventMap<HTMLCanvasElement>>(name: Event, callback: (event: EventMap<HTMLCanvasElement>[Event]) => void): () => void;
@@ -16,7 +17,10 @@ export declare class Painter {
     draw(position: RelativePosition, redraw?: boolean): void;
     drawEnd(redraw?: boolean): void;
     redraw(): void;
-    setTarget(canvas: HTMLCanvasElement): void;
+    setTarget({ target, onDraw }: {
+        target: HTMLCanvasElement;
+        onDraw: () => void;
+    }): void;
     setOptions({ color, thickness, paintBrush }: PainterOption): void;
     setCursor(): void;
     getFigures(): void;
